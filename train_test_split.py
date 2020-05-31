@@ -1,0 +1,15 @@
+import random
+import message_preprocessing as ms
+
+messages_set = ms.messages_set
+## Preparing to create a train and test set
+
+## - creating slicing index at 80% threshold
+sliceIndex = int((len(messages_set) * 0.8))
+## - shuffle the pack to create a random and unbiased split of the dataset
+random.shuffle(messages_set)
+
+train_messages, test_messages = messages_set[:sliceIndex], messages_set[sliceIndex:]
+
+# print(len(train_messages))
+# print(len(test_messages))
