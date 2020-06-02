@@ -1,7 +1,9 @@
 import pandas as pd
 
+""" Read the input data (spam collection txt file) into a pandas dataframe """
+
 ## Reading the given dataset
-spam = pd.read_csv("SMSSpamCollection.txt", sep="\t", names=["label", "message"])
+spam = pd.read_csv("data/SMSSpamCollection.txt", sep="\t", names=["label", "message"])
 # print(spam.head())
 
 ## Converting the read dataset in to a list of tuples, each tuple(row) contianing the message and it's label

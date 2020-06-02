@@ -1,10 +1,11 @@
-import random
 import nltk
 import pandas as pd
-from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
-from nltk.stem.porter import PorterStemmer
 from nltk.stem import WordNetLemmatizer
+from nltk.stem.porter import PorterStemmer
+from nltk.tokenize import word_tokenize
+from typing import List, Tuple, Optional
+
 
 """ run this if getting error for wordnet """
 # import nltk
@@ -15,19 +16,15 @@ stemmer = PorterStemmer()
 word_lemmatizer = WordNetLemmatizer()
 
 
-def preprocess(document: str, stem: bool = True) -> str:
+def preprocess(document: str, stem: Optional[bool] = True) -> str:
     """[summary]
         changes document to lower case, removes stopwords and lemmatizes/stems the remainder of the sentence
     Arguments:
-        document {str} -- message 
+        document {str} -- message to be processed
 
     Keyword Arguments:
-        stem {bool} -- Apply stemming or lemmatization (default: {True} -> stemming)
-
-    Returns:
-        str -- Filtered message
+        stem {Optional[bool]} -- apply stemming if true else apply lemmatization {DEfault : True}
     """
-
     # change sentence to lower case
     document = document.lower()
     # tokenize into words
@@ -48,14 +45,11 @@ def preprocess(document: str, stem: bool = True) -> str:
     return documents
 
 
-def filter_message(data_set: list) -> list:
+def filter_message(data_set: List[Tuple[str, str]]) -> List[Tuple[str, str]]:
     """[summary]
-     Filters the message using the preprocess function and length of word in message.
+        Filters the message using the preprocess function and length of word in message.
     Arguments:
-        data_set {list} -- List of tuple containing message and corresponding message label.
-
-    Returns:
-        list -- List of tuple containing filtered list of words in message and corresponding message label.
+        data_set {List[Tuple[str, str]]} -- list of tuple containing message and corresponding label
     """
 
     messages_set = []
@@ -70,15 +64,11 @@ def filter_message(data_set: list) -> list:
     return messages_set
 
 
-def get_words_in_messages(messages: list) -> list:
+def get_words_in_messages(messages: List[str]) -> List[str]:
     """[summary]
         creating a single list of all words in the entire dataset for bag of words creation.
-
     Arguments:
-        messages {list} -- list of list of words in messages.
-
-    Returns:
-        list -- list of all words.
+        messages {List[str]} -- list containing messages
     """
     all_words = []
     for words in messages:
@@ -86,16 +76,12 @@ def get_words_in_messages(messages: list) -> list:
     return all_words
 
 
-def create_bag_of_words(messages: list) -> list:
+def create_bag_of_words(messages: List[str]) -> List[str]:
     """[summary]
         Creating a bag of words list using an intuitive FreqDist, to eliminate all the duplicate words.
         Note : we can use the Frequency Distribution of the entire dataset to calculate Tf-Idf scores like we did earlier.
-
     Arguments:
-        messages {list} -- list of list of words in messages
-
-    Returns:
-        list -- bag of words list
+        messages {List[str]} -- list containg messages
     """
     all_words = get_words_in_messages(messages)
     wordlist = nltk.FreqDist(all_words)

@@ -1,5 +1,8 @@
+import random
 import read_dataset as rd
-import helpers as hp
+import preprocessing_helpers as hp
+
+""" Preprocess the messages and create bag of words """
 
 ## - Performing the preprocessing steps on all messages
 messages_set = hp.filter_message(rd.data_set)

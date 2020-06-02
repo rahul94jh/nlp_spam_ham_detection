@@ -1,6 +1,10 @@
-import helpers as hp
 import message_preprocessing as mp
+import preprocessing_helpers as hp
+
 import train_test_split as tts
+
+""" Perform custom vectorization to indicate the presence of features from bow in each documents messages,
+True for all those bow features which are also present in the document """
 
 
 ## creating a LazyMap of feature presence for each of the 8K+ features with respect to each of the SMS messages
